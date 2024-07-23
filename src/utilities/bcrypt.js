@@ -15,10 +15,10 @@ const encodePassword = async (password) => {
     }
 }
 
-const decodePassword = async (password) => {
+const decodePassword = async (password, hashedPassword) => {
     try {
         // decode password
-        const decodedPassword = await bcrypt.compare(password);
+        const decodedPassword = await bcrypt.compare(password, hashedPassword);
         return decodedPassword;
     } catch (err) {
         console.error(err);
