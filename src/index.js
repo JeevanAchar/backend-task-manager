@@ -23,9 +23,9 @@ const errorHandler = require("./middleware/errorHandler.js");
 
 // limiting the useage 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 100,
-    max: 100
-})
+    windowMs: 15 * 60 * 1000, // 15 minutes in milliseconds
+    max: 100 // limit each IP to 100 requests per windowMs
+});
 
 // Middleware
 app.use(cors());
