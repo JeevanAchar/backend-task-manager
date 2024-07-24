@@ -8,6 +8,7 @@ const session = require("express-session");
 const PORT = process.env.PORT || 5001;
 const secret = process.env.SECRET;
 const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 // user route
 const userRoute = require("./routers/userRoute.js");
@@ -20,6 +21,12 @@ const authMiddleware = require("./middleware/authMiddleware.js");
 // Error handler
 const errorHandler = require("./middleware/errorHandler.js");
 
+// limiting the useage 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes in milliseconds
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -27,6 +34,7 @@ app.use(session({ secret: secret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(helmet());
+app.use(limiter);
 
 // Connect to database
 connectDb();
