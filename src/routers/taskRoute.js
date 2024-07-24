@@ -2,11 +2,11 @@ const { getTask, addTask, updateTask, deletetask } = require("../controller/task
 
 const route = require("express").Router();
 
-// get task
-route.get("/tasks", getTask);
+// get tasks
+route.get("/tasks/:id", getTask);
 
 // add task || Post task
-route.post("/task", addTask);
+route.post("/task/:id", addTask);
 
 // Update the task
 route.put("/task/:id", updateTask);

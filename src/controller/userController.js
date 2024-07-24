@@ -29,6 +29,7 @@ const Register = async (req, res, next) => {
                     statusCode: 201,
                     message: "Success",
                     data: {
+                        id: user._id,
                         firstName,
                         email,
                         token
@@ -74,6 +75,7 @@ const Login = async (req, res, next) => {
             statusCode: 200,
             message: "Success",
             data: {
+                id: user._id,
                 email: user.email,
                 token
             }

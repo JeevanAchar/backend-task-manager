@@ -1,9 +1,10 @@
 const Task = require("../models/taskModel.js");
 
 const getTask = async (req, res, next) => {
+    const userId = req.params.id;
     try {
-        const task = await Task.find();
-        if (task.length) {
+        const task = await Task.find({ userId: userId });
+        if (task) {
             return res.status(200).json({
                 statusCode: 200,
                 message: "Success",
@@ -24,14 +25,15 @@ const getTask = async (req, res, next) => {
 }
 
 const addTask = async (req, res, next) => {
+    const id = req.params.id;
     const { title, description, status } = req.body;
     try {
-        const task = Task.create({
+        const task = await Task.create({
+            userId: id,
             title,
             description,
             status
         });
-
         return res.status(200).json({
             statusCode: 200,
             message: "Success",

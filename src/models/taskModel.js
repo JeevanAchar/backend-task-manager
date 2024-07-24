@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const taskModel = new mongoose.Schema({
+    userId: {
+        type: String,
+        trim: true,
+    },
     title: {
         type: String,
         trim: true
